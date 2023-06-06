@@ -18,8 +18,8 @@ pip install -r requirements-dev.txt
 ```
 ## Run
 
-This uses a local CSV file with addresses to lookup and then creates a CSV file with the addresses and a new column with the OSM ID.
+This uses a local CSV file named `addresses.csv` with addresses to lookup and then creates a CSV file named `output.csv` with the addresses and a new column with the OSM ID.
 
 ```sh
-python nominatim.py -f addresses.csv
+python nominatim.py
 ```
