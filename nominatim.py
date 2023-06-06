@@ -1,3 +1,4 @@
+import sys
 import csv
 import requests
 from urllib.parse import quote
@@ -35,6 +36,10 @@ def process_addresses(input_file, output_file):
 
 
 # Usage example
-input_file = "addresses.csv"
-output_file = "output.csv"
-process_addresses(input_file, output_file)
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python address_search.py <input_file> <output_file>")
+    else:
+        input_file = sys.argv[1]
+        output_file = sys.argv[2]
+        process_addresses(input_file, output_file)
