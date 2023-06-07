@@ -5,15 +5,18 @@ from urllib.parse import quote
 
 
 def search_address(address):
-    encoded_address = quote(address)
-    url = f"https://nominatim.openstreetmap.org/search?q={encoded_address}&format=json"
-    response = requests.get(url)
-    data = response.json()
+    try:
+        encoded_address = quote(address)
+        url = f"https://nominatim.openstreetmap.org/search?q={encoded_address}&format=json"
+        response = requests.get(url)
+        data = response.json()
 
-    if data:
-        place_id = data[0].get("place_id", "")
-        osm_id = data[0].get("osm_id", "")
-        return place_id, osm_id
+        if data:
+            place_id = data[0].get("place_id", "")
+            osm_id = data[0].get("osm_id", "")
+            return place_id, osm_id
+    except Exception as e:
+        print(f"Error occurred during address lookup for address {address}: {e}")
     else:
         return "", ""
 
@@ -38,7 +41,7 @@ def process_addresses(input_file, output_file):
 # Usage example
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python address_search.py <input_file> <output_file>")
+        print("Usage: python nominatim.py <input_file> <output_file>")
     else:
         input_file = sys.argv[1]
         output_file = sys.argv[2]
