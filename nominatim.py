@@ -5,18 +5,16 @@ from urllib.parse import quote
 
 
 def search_address(address):
-    try:
-        encoded_address = quote(address)
-        url = f"https://nominatim.openstreetmap.org/search?q={encoded_address}&format=json"
-        response = requests.get(url)
-        data = response.json()
+    encoded_address = quote(address)
+    url = f"https://nominatim.openstreetmap.org/search?q={encoded_address}&format=json"
+    print(f"URL: {url}")
+    response = requests.get(url)
+    data = response.json()
 
-        if data:
-            place_id = data[0].get("place_id", "")
-            osm_id = data[0].get("osm_id", "")
-            return place_id, osm_id
-    except Exception as e:
-        print(f"Error occurred during address lookup for address {address}: {e}")
+    if data:
+        osm_type = data[0].get("osm_type", "")
+        osm_id = data[0].get("osm_id", "")
+        return osm_type, osm_id
     else:
         return "", ""
 
@@ -28,12 +26,15 @@ def process_addresses(input_file, output_file):
 
         with open(output_file, "w", newline="") as output_csv:
             writer = csv.writer(output_csv, delimiter=";")
-            writer.writerow(header + ["Place ID", "OSM ID"])  # Write header row
+            writer.writerow(
+                header + ["OSM Type", "OSM ID", "Unique ID"]
+            )  # Write header row
 
             for row in reader:
                 address = row[0]
-                place_id, osm_id = search_address(address)
-                writer.writerow(row + [place_id, osm_id])  # Write output row
+                osm_type, osm_id = search_address(address)
+                unique_id = f"{osm_type}_{osm_id}"
+                writer.writerow(row + [osm_type, osm_id, unique_id])  # Write output row
 
     print(f"Processed addresses saved to {output_file}.")
 

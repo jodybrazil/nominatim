@@ -1,4 +1,9 @@
-address;Place ID;OSM ID
-515 Westerman Rd., Breckenridge, CO;318786362;131897452
-8750 Penrose Ln, Lenexa, KS;233885926;633832364
-16105 W 87th St, Lenexa, KS 66219;323616526;634472821
+address;OSM Type;OSM ID;Unique ID
+515 Westerman Rd., Breckenridge, CO;way;131897452;way_131897452
+8750 Penrose Ln, Lenexa, KS;way;633832364;way_633832364
+16105 W 87th St, Lenexa, KS 66219;way;634472821;way_634472821
+14 Rue des Canettes, 75006 Paris, France;node;805954908;node_805954908
+Museumplein 6, 1071 DJ Amsterdam, Netherlands;node;9036429955;node_9036429955
+Utrechtsedwarsstraat 79, 1017 WD Amsterdam, Netherlands;node;2737864228;node_2737864228
+Trafalgar Square, London WC2N 5DN, United Kingdom;relation;3962877;relation_3962877
+Anfield Rd, Anfield, Liverpool L4 0TH, United Kingdom;way;966426949;way_966426949

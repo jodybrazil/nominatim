@@ -1,14 +1,12 @@
 # Nominatim lookup
 
-A test project to do address lookups and retrieve a list of OpenStreetMap IDs and Nominatim Place IDs to uniquely identify an address. Either can be used to uniquely identify a location. Storing both seems redundant for this putpose but seems valuable until it can be determined which will serve as a better ID.
+A test project to do address lookups and retrieve a list of OpenStreetMap IDs (osm_id) to uniquely identify an address. See more details here [https://nominatim.org/release-docs/develop/api/Output/#notes-on-field-values]. OSM Objects must always be referred to both with their object ids and their respective object type (node, way, relation). To create a unique id for each address, we should use osm_type + osm_id.
 
-## Details about Place ID and OpenStreetMap ID
+Other alternatives to consider:
 
-The place_id and osm_id are identifiers associated with specific geographic locations, but they serve different purposes and come from different sources.
-
-Place ID: The place_id is an identifier used by the Nominatim geocoding service. It is specific to the Nominatim database and is assigned to each unique place or location within that database. Place IDs are useful for retrieving additional details or performing further queries related to a particular place in the Nominatim database.
-
-OSM ID: The osm_id (OpenStreetMap ID) is an identifier used in the OpenStreetMap project, which is a collaborative mapping project that creates and provides free geographic data. The osm_id uniquely identifies an object (such as a node, way, or relation) within the OpenStreetMap database. It is widely used to reference and access the associated geographic data stored in OpenStreetMap.
+- osm_type + osm_id
+- osm_type + osm_id + class
+- lat + lon
 
 ## Setup
 
@@ -27,7 +25,7 @@ pip install -r requirements-dev.txt
 
 ## Run
 
-This uses a local CSV file with a single column of addresses to lookup and then creates a CSV file with the addresses and a new column with the OSM ID.
+This uses a local CSV file with a single column of addresses to lookup and then creates a CSV file with the addresses and new columns with the OSM type, OSM ID, and UniqueID which is a combination of type and id separated with an underscore ("_").
 
 NOTE: the delimiter is a semicolon (;) for the CSV to allow commas to be used in the address.
 
